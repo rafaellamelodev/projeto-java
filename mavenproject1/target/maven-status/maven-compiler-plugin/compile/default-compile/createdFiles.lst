@@ -10,6 +10,9 @@ src\ClassManagement.class
 src\StudentManagement.class
 connections\DatabaseConnection.class
 frames\TelaLogin$2.class
+<<<<<<< HEAD
 frames\TelaLancamentoNotas$1.class
+=======
+>>>>>>> 14b6e9390205a34d7efabd24b176c8b301515c26
 frames\TelaCadAlunos$3.class
 frames\TelaLancamentoNotas.class
