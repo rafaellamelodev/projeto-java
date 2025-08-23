@@ -4,10 +4,42 @@
  */
 package src;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import org.mindrot.jbcrypt.BCrypt;
+import connections.*;
+
 /**
  *
  * @author D18_11
  */
 public class UserOperations {
+    
+         public boolean loginUser (String email, String senha){
+          String query = "SELECT * FROM users WHERE email = ?";
+          try (Connection conexao = DatabaseConnection.getConnection();
+               PreparedStatement login = conexao.prepareStatement(query)) {
+            login.setString(1, email);
+            
+            
+            ResultSet consulta = login.executeQuery();
+            
+            if (consulta.next()){
+                String senhaArm = consulta.getString("senha");
+                
+                if(senha.equals(senhaArm)){
+                    return true;
+                }
+            } return false;
+              
+          } catch (SQLException e) {
+             e.printStackTrace(); /*imprime o erro no console*/
+            return false; /*retorno falso significa falha*/
+        }
+       
+     
+      }
     
 }
