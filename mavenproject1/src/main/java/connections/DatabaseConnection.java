@@ -17,6 +17,7 @@ public class DatabaseConnection {
             "jdbc:mysql://localhost:3306/bd_jschool";     
     private static final String USER = "root";
     private static final String SENHA = "admin";
+    private static final String teste = "teste";
     
     
     /*método para tentar conectar ao banco de dados
