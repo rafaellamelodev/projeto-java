@@ -10,7 +10,6 @@ package connections;
  */
 public class testeeee {
     public static void main(String[] args) {
-        System.out.println("teste");
-        System.out.println("testeeeee");
+        System.out.println("VAI CORINTHIANS");
     }
 }
