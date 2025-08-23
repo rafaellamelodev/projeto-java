@@ -35,8 +35,10 @@ public class UserOperations {
             } return false;
               
           } catch (SQLException e) {
+
              e.printStackTrace();
             return false;
+
         }
        
      
