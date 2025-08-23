@@ -35,8 +35,8 @@ public class UserOperations {
             } return false;
               
           } catch (SQLException e) {
-             e.printStackTrace(); /*imprime o erro no console*/
-            return false; /*retorno falso significa falha*/
+             e.printStackTrace(); 
+            return false; 
         }
        
      
