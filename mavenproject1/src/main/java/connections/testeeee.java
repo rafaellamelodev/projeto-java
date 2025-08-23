@@ -9,5 +9,8 @@ package connections;
  * @author D18_11
  */
 public class testeeee {
-    
+    public static void main(String[] args) {
+        System.out.println("teste");
+        System.out.println("testeeeee");
+    }
 }
