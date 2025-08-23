@@ -1,6 +1,7 @@
 frames\TelaCadAlunos$2.class
 frames\TelaCadAlunos.class
 connections\testeeee.class
+frames\TelaLancamentoNotas$2.class
 frames\TelaLogin.class
 src\UserOperations.class
 frames\TelaLogin$1.class
@@ -9,5 +10,6 @@ src\ClassManagement.class
 src\StudentManagement.class
 connections\DatabaseConnection.class
 frames\TelaLogin$2.class
-frames\TelaCadAlunos$4.class
+frames\TelaLancamentoNotas$1.class
 frames\TelaCadAlunos$3.class
+frames\TelaLancamentoNotas.class
