@@ -4,10 +4,12 @@
  */
 package frames;
 
+import java.awt.Color;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.border.LineBorder;
 import src.UserOperations;
 
 /**
@@ -108,8 +110,14 @@ public class TelaLogin extends javax.swing.JFrame {
         String senha = txtSenha.getText().trim();
         
         /*String senha = new String(txtSenhaLogin.getPassword()); -> caso tenha usado o password field*/
-        boolean sucesso = autenticacao.loginUser(email,senha);
-        if (sucesso){
+       
+        if ((email.isEmpty() || email.isBlank()) && (senha.isEmpty() || senha.isBlank())){
+            JOptionPane.showMessageDialog(this, "Todos os campos devem ser preenchidos");
+            txtLogin.setBorder(new LineBorder(Color.RED,1));
+            txtSenha.setBorder(new LineBorder(Color.RED,1));
+        } else {
+               boolean sucesso = autenticacao.loginUser(email,senha);
+            if (sucesso){
             JOptionPane.showMessageDialog(this, "Login realizado com sucesso!");
             new TelaCadAlunos().setVisible(true);
             dispose();
@@ -119,6 +127,9 @@ public class TelaLogin extends javax.swing.JFrame {
             txtLogin.setText("");
             txtSenha.setText("");
         }
+        }
+          
+        
     }//GEN-LAST:event_btnEntrarActionPerformed
 
     /**
