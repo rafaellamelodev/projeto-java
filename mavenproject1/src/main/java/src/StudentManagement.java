@@ -35,5 +35,30 @@ public class StudentManagement {
             e.printStackTrace(); /*imprime o erro no console*/
             return false; /*retorno falso significa falha*/
         } 
-      }        
+      }
+      
+      public boolean deletarUsuario (String cpf) throws SQLException{
+        
+          String query = "DELETE FROM alunos WHERE cpf = ?";
+          
+          try (Connection conexao = src.DatabaseConnection.getConnection();
+                  PreparedStatement consulta = conexao.prepareStatement(query)) {
+              consulta.setString(1, cpf);
+              
+              
+              int linhasAlteradas = consulta.executeUpdate();
+              return linhasAlteradas > 0;
+          }catch (SQLException e) {
+            e.printStackTrace(); 
+            return false;
+        }
+          
+      }      
+
+    public boolean deletarConta(String cpf) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+   
+    
 }
