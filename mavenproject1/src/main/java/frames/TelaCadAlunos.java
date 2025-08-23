@@ -1,14 +1,21 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package frames;
+
+import java.awt.Color;
+import java.sql.SQLException;
+import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.border.LineBorder;
+import src.StudentManagement;
 
 /**
  *
  * @author D18_11
  */
 public class TelaCadAlunos extends javax.swing.JFrame {
+
+    private StudentManagement autenticacao = new StudentManagement();
 
     /**
      * Creates new form TelaCadAlunos
@@ -26,21 +33,197 @@ public class TelaCadAlunos extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        lblNomeCompleto = new javax.swing.JLabel();
+        txtNomeCompleto = new javax.swing.JTextField();
+        lblMatricula = new javax.swing.JLabel();
+        txtMatricula = new javax.swing.JTextField();
+        lblCPF = new javax.swing.JLabel();
+        txtCPF = new javax.swing.JTextField();
+        lblEmail = new javax.swing.JLabel();
+        txtEmail = new javax.swing.JTextField();
+        btnCadastrar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        btnGerar = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        lblDeletarUsuario = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        lblNomeCompleto.setText("Nome completo");
+
+        lblMatricula.setText("Matrícula");
+
+        lblCPF.setText("CPF");
+
+        lblEmail.setText("E-mail");
+
+        btnCadastrar.setText("CADASTRAR");
+        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastrarActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Cadastro de alunos");
+
+        btnGerar.setText("GERAR");
+        btnGerar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGerarActionPerformed(evt);
+            }
+        });
+
+        btnEditar.setText("EDITAR");
+
+        jButton1.setText("LISTAR ALUNOS");
+
+        lblDeletarUsuario.setText("Deletar minha conta");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnEditar)
+                        .addGap(37, 37, 37)
+                        .addComponent(lblDeletarUsuario)
+                        .addGap(41, 41, 41)
+                        .addComponent(btnCadastrar)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(135, 135, 135))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(lblMatricula, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblNomeCompleto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblCPF)
+                                    .addComponent(lblEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(txtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btnGerar))
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(txtNomeCompleto)
+                                        .addComponent(txtCPF)
+                                        .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)))
+                                .addGap(79, 79, 79))))))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(39, 39, 39)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtNomeCompleto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNomeCompleto))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblMatricula)
+                    .addComponent(txtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGerar))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCPF)
+                    .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblEmail)
+                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(51, 51, 51)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnEditar)
+                    .addComponent(btnCadastrar)
+                    .addComponent(jButton1)
+                    .addComponent(lblDeletarUsuario))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+        try {
+
+            String nome = txtNomeCompleto.getText().trim();
+            String cpf = txtCPF.getText().trim();
+            String email = txtEmail.getText().trim();
+            String matricula = txtMatricula.getText().trim();
+
+            if (nome.isEmpty() || nome.isBlank()) {
+                txtNomeCompleto.setBorder(new LineBorder(Color.RED, 1));
+            } else {
+                txtNomeCompleto.setBorder(new LineBorder(Color.GRAY));
+            }
+
+            int confirmacao = JOptionPane.showConfirmDialog(
+                    this, "Confirme os campos para cadastrar:\nNome: " + nome + "\nMatrícula: " + matricula + "\nEmail: " + email + "\nCPF: " + cpf);
+
+            if (confirmacao != JOptionPane.YES_OPTION) {
+                return;
+            }
+
+            boolean sucesso = autenticacao.StudentManagement(matricula, nome, cpf, email);
+
+            if (sucesso) {
+                JOptionPane.showMessageDialog(this, "Registro realizado com sucesso.");
+                txtNomeCompleto.setText("");
+                txtMatricula.setText("");
+                txtCPF.setText("");
+                txtEmail.setText("");
+            } else {
+                JOptionPane.showMessageDialog(this, "Erro no registro");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaCadAlunos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_btnCadastrarActionPerformed
+
+    private void btnGerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarActionPerformed
+        try {
+            int tamanho = 4;
+
+            String caracteres = "1234567890";
+            Random random = new Random();
+            StringBuilder matricula = new StringBuilder();
+
+            for (int i = 0; i < tamanho; i++) {
+                int indice = random.nextInt(caracteres.length());
+                matricula.append(caracteres.charAt(indice));
+
+            }
+            String user = "A" + matricula;
+            txtMatricula.setText(user.toString());
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Erro de processamento");
+        }
+    }//GEN-LAST:event_btnGerarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +261,21 @@ public class TelaCadAlunos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCadastrar;
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnGerar;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblCPF;
+    private javax.swing.JLabel lblDeletarUsuario;
+    private javax.swing.JLabel lblEmail;
+    private javax.swing.JLabel lblMatricula;
+    private javax.swing.JLabel lblNomeCompleto;
+    private javax.swing.JTextField txtCPF;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtMatricula;
+    private javax.swing.JTextField txtNomeCompleto;
     // End of variables declaration//GEN-END:variables
+
 }
