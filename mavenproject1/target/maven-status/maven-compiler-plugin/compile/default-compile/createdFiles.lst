@@ -9,5 +9,4 @@ src\ClassManagement.class
 src\StudentManagement.class
 connections\DatabaseConnection.class
 frames\TelaLogin$2.class
-frames\TelaCadAlunos$4.class
 frames\TelaCadAlunos$3.class
