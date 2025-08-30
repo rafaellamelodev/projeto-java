@@ -1,13 +1,17 @@
 frames\TelaCadAlunos$2.class
 frames\TelaCadAlunos.class
+dao\DisciplinaDAO.class
 frames\TelaLancamentoNotas$2.class
 frames\TelaLogin.class
 frames\EditarUsuario$1.class
+model\Disciplina.class
 frames\EditarUsuario$3.class
 frames\TelaDisciplinas$2.class
 src\StudentManagement.class
 connections\DatabaseConnection.class
 frames\TelaLogin$2.class
+model\Aluno.class
+dao\UserDAO.class
 frames\TelaLancamentoNotas$1.class
 frames\TelaCadAlunos$4.class
 frames\EditarUsuario.class
@@ -23,5 +27,7 @@ frames\TelaCadAlunos$1.class
 frames\TelaCadAlunos$6.class
 frames\TelaCadAlunos$5.class
 src\ClassManagement.class
+frames\TelaDisciplinas$3.class
+dao\AlunoDAO.class
 frames\TelaCadAlunos$3.class
 frames\TelaLancamentoNotas.class
