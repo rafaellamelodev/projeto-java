@@ -111,7 +111,7 @@ public class TelaLogin extends javax.swing.JFrame {
         
         /*String senha = new String(txtSenhaLogin.getPassword()); -> caso tenha usado o password field*/
        
-        if ((email.isEmpty() || email.isBlank()) && (senha.isEmpty() || senha.isBlank())){
+        if ((email.isEmpty() || email.isBlank()) || (senha.isEmpty() || senha.isBlank())){
             JOptionPane.showMessageDialog(this, "Todos os campos devem ser preenchidos");
             txtLogin.setBorder(new LineBorder(Color.RED,1));
             txtSenha.setBorder(new LineBorder(Color.RED,1));
