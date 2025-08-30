@@ -213,6 +213,7 @@ public class TelaCadAlunos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+
         try {
 
             String nome = txtNomeCompleto.getText().trim();
@@ -220,30 +221,33 @@ public class TelaCadAlunos extends javax.swing.JFrame {
             String email = txtEmail.getText().trim();
             String matricula = txtMatricula.getText().trim();
 
-            if (nome.isEmpty() || nome.isBlank()) {
+            if ((nome.isEmpty() || nome.isBlank()) || (cpf.isEmpty() || cpf.isBlank()) || (email.isEmpty() || email.isBlank()) || (matricula.isEmpty() || matricula.isBlank())) {
+                JOptionPane.showMessageDialog(this, "Todos os campos devem ser preenchidos");
                 txtNomeCompleto.setBorder(new LineBorder(Color.RED, 1));
+                txtCPF.setBorder(new LineBorder(Color.RED, 1));
+                txtEmail.setBorder(new LineBorder(Color.RED, 1));
+                txtMatricula.setBorder(new LineBorder(Color.RED, 1));
             } else {
-                txtNomeCompleto.setBorder(new LineBorder(Color.GRAY));
+                int confirmacao = JOptionPane.showConfirmDialog(
+                        this, "Confirme os campos para cadastrar:\nNome: " + nome + "\nMatrícula: " + matricula + "\nCPF: " + cpf + "\nE-mail: " + email);
+
+                if (confirmacao != JOptionPane.YES_OPTION) {
+                    return;
+                }
+
+                boolean sucesso = autenticacao.StudentManagement(matricula, nome, cpf, email);
+
+                if (sucesso) {
+                    JOptionPane.showMessageDialog(this, "Registro realizado com sucesso.");
+                    txtNomeCompleto.setText("");
+                    txtMatricula.setText("");
+                    txtCPF.setText("");
+                    txtEmail.setText("");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Erro no registro");
+                }
             }
 
-            int confirmacao = JOptionPane.showConfirmDialog(
-                    this, "Confirme os campos para cadastrar:\nNome: " + nome + "\nMatrícula: " + matricula + "\nEmail: " + email + "\nCPF: " + cpf);
-
-            if (confirmacao != JOptionPane.YES_OPTION) {
-                return;
-            }
-
-            boolean sucesso = autenticacao.StudentManagement(matricula, nome, cpf, email);
-
-            if (sucesso) {
-                JOptionPane.showMessageDialog(this, "Registro realizado com sucesso.");
-                txtNomeCompleto.setText("");
-                txtMatricula.setText("");
-                txtCPF.setText("");
-                txtEmail.setText("");
-            } else {
-                JOptionPane.showMessageDialog(this, "Erro no registro");
-            }
         } catch (SQLException ex) {
             Logger.getLogger(TelaCadAlunos.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -312,7 +316,7 @@ public class TelaCadAlunos extends javax.swing.JFrame {
         }
     }
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        // Campos de entrada para edição de dados do aluno
+        
 
     }//GEN-LAST:event_btnEditarActionPerformed
 

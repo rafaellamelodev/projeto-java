@@ -17,7 +17,7 @@ import src.UserOperations;
  * @author D18_11
  */
 public class TelaLogin extends javax.swing.JFrame {
-    
+
     private UserOperations autenticacao = new UserOperations();
 
     /**
@@ -106,30 +106,29 @@ public class TelaLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
-       String email = txtLogin.getText().trim();
+        String email = txtLogin.getText().trim();
         String senha = txtSenha.getText().trim();
-        
+
         /*String senha = new String(txtSenhaLogin.getPassword()); -> caso tenha usado o password field*/
-       
-        if ((email.isEmpty() || email.isBlank()) && (senha.isEmpty() || senha.isBlank())){
+        if ((email.isEmpty() || email.isBlank()) && (senha.isEmpty() || senha.isBlank())) {
             JOptionPane.showMessageDialog(this, "Todos os campos devem ser preenchidos");
-            txtLogin.setBorder(new LineBorder(Color.RED,1));
-            txtSenha.setBorder(new LineBorder(Color.RED,1));
+            txtLogin.setBorder(new LineBorder(Color.RED, 1));
+            txtSenha.setBorder(new LineBorder(Color.RED, 1));
         } else {
-               boolean sucesso = autenticacao.loginUser(email,senha);
-            if (sucesso){
-            JOptionPane.showMessageDialog(this, "Login realizado com sucesso!");
-            new TelaCadAlunos().setVisible(true);
-            dispose();
-        
-        } else {
-            JOptionPane.showMessageDialog(this, "Não foi possível logar");
-            txtLogin.setText("");
-            txtSenha.setText("");
+            boolean sucesso = autenticacao.loginUser(email, senha);
+            if (sucesso) {
+                JOptionPane.showMessageDialog(this, "Login realizado com sucesso!");
+                new TelaCadAlunos().setVisible(true);
+                dispose();
+
+            } else {
+                JOptionPane.showMessageDialog(this, "Não foi possível logar");
+                txtLogin.setText("");
+                txtSenha.setText("");
+            }
         }
-        }
-          
-        
+
+
     }//GEN-LAST:event_btnEntrarActionPerformed
 
     /**
