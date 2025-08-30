@@ -3,16 +3,20 @@ frames\TelaCadAlunos.class
 connections\testeeee.class
 frames\TelaLancamentoNotas$2.class
 frames\TelaLogin.class
+frames\TelaDisciplinas.class
+frames\TelaLancamentoNotas$3.class
+frames\teste.class
 src\UserOperations.class
+frames\TelaDisciplinas$1.class
 frames\TelaLogin$1.class
+frames\teste$1.class
 frames\TelaCadAlunos$1.class
 src\ClassManagement.class
+frames\TelaDisciplinas$2.class
 src\StudentManagement.class
 connections\DatabaseConnection.class
 frames\TelaLogin$2.class
-<<<<<<< HEAD
+src\TESTE.class
 frames\TelaLancamentoNotas$1.class
-=======
->>>>>>> 14b6e9390205a34d7efabd24b176c8b301515c26
 frames\TelaCadAlunos$3.class
 frames\TelaLancamentoNotas.class
