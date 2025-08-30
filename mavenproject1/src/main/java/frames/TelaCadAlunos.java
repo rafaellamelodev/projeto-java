@@ -1,18 +1,20 @@
 package frames;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
+import javax.swing.*;
 import src.*;
+import java.util.*;
+import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author D18_11
- */
 public class TelaCadAlunos extends javax.swing.JFrame {
 
     private StudentManagement autenticacao = new StudentManagement();
@@ -22,6 +24,7 @@ public class TelaCadAlunos extends javax.swing.JFrame {
      */
     public TelaCadAlunos() {
         initComponents();
+
     }
 
     /**
@@ -48,6 +51,8 @@ public class TelaCadAlunos extends javax.swing.JFrame {
         btnEditar = new javax.swing.JButton();
         btnListarAlunos = new javax.swing.JButton();
         btnDeletarConta = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblAlunos = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -76,8 +81,18 @@ public class TelaCadAlunos extends javax.swing.JFrame {
         });
 
         btnEditar.setText("EDITAR");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
 
         btnListarAlunos.setText("LISTAR ALUNOS");
+        btnListarAlunos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnListarAlunosActionPerformed(evt);
+            }
+        });
 
         btnDeletarConta.setText("DELETAR CONTA");
         btnDeletarConta.addActionListener(new java.awt.event.ActionListener() {
@@ -85,6 +100,27 @@ public class TelaCadAlunos extends javax.swing.JFrame {
                 btnDeletarContaActionPerformed(evt);
             }
         });
+
+        tblAlunos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Matrícula", "Nome", "CPF", "Email"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tblAlunos);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -110,10 +146,10 @@ public class TelaCadAlunos extends javax.swing.JFrame {
                                 .addComponent(txtNomeCompleto)
                                 .addComponent(txtCPF)
                                 .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 67, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnListarAlunos)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(26, 26, 26)
                         .addComponent(btnDeletarConta)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnEditar)))
@@ -122,6 +158,10 @@ public class TelaCadAlunos extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(79, 79, 79))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -152,7 +192,9 @@ public class TelaCadAlunos extends javax.swing.JFrame {
                     .addComponent(btnEditar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCadastrar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(240, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -229,7 +271,7 @@ public class TelaCadAlunos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGerarActionPerformed
 
     private void btnDeletarContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarContaActionPerformed
-        String cpf = JOptionPane.showInputDialog(this, "Digite seu email para exclusão");
+        String cpf = JOptionPane.showInputDialog(this, "Digite seu CPF para exclusão");
         if (cpf == null || cpf.trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "CPF obrigatório");
             return;
@@ -238,12 +280,41 @@ public class TelaCadAlunos extends javax.swing.JFrame {
         if (confirmacao != JOptionPane.YES_OPTION) {
             return;
         }
-//        if (autenticacao.deletarUsuario(cpf)) {
-//            JOptionPane.showMessageDialog(this, "Usuário deletado com sucesso!");
-//        } else {
-//            JOptionPane.showMessageDialog(this, "Não foi possível deletarD o usuário");
-//        }
+
+        try {
+            if (autenticacao.deletarConta(cpf)) {
+                JOptionPane.showMessageDialog(this, "Usuário deletado com sucesso!");
+            } else {
+                JOptionPane.showMessageDialog(this, "Não foi possível deletar o usuário");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaCadAlunos.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnDeletarContaActionPerformed
+
+    private void btnListarAlunosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarAlunosActionPerformed
+        try {
+            carregarAluno();
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaCadAlunos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_btnListarAlunosActionPerformed
+
+    private void carregarAluno() throws SQLException {
+        List<String[]> alunos = autenticacao.listarAlunos();
+
+        DefaultTableModel tabela = (DefaultTableModel) tblAlunos.getModel();
+        tabela.setRowCount(0);
+
+        for (String[] aluno : alunos) {
+            tabela.addRow(aluno);
+        }
+    }
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        // Campos de entrada para edição de dados do aluno
+
+    }//GEN-LAST:event_btnEditarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -287,11 +358,13 @@ public class TelaCadAlunos extends javax.swing.JFrame {
     private javax.swing.JButton btnGerar;
     private javax.swing.JButton btnListarAlunos;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblCPF;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblMatricula;
     private javax.swing.JLabel lblNomeCompleto;
     private javax.swing.JLabel lblTitulo;
+    private javax.swing.JTable tblAlunos;
     private javax.swing.JTextField txtCPF;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtMatricula;
