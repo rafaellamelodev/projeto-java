@@ -4,16 +4,19 @@
  */
 package connections;
 
+import src.ClassManagement;
+
 /**
  *
  * @author D18_11
  */
 public class testeeee {
+
+    private static String turma;
     public static void main(String[] args) {
 
-        System.out.println("O Mitoooo");
-       
-        System.out.println("teste teste");
+         ClassManagement teste = new ClassManagement();
+        teste.listarAlunos("TUR001");
     
 
 }

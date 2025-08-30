@@ -43,23 +43,34 @@ public class ClassManagement {
             return listaUsuarios;
         }
         
-        public List<String[]> listarNotas() {
+        public List<String[]> listarAlunos(String turma) {
         List<String[]> alunos = new ArrayList<>();
 
-        String query = "SELECT matricula, nome, cpf, email FROM alunos";
+        String query = "SELECT nome, nota_final FROM alunos WHERE turma = ?"; 
 
         try (Connection conexao = DatabaseConnection.getConnection(); PreparedStatement consulta = conexao.prepareStatement(query)) {
 
-            ResultSet rs = consulta.executeQuery();
-            // Itera sobre o ResultSet e adiciona cada aluno à lista
+            ResultSet rs = consulta.executeQuery();  
+            consulta.setString(1, turma);
+         
+    
             while (rs.next()) {
-                String matricula = rs.getString("matricula");
+              
                 String nome = rs.getString("nome");
-                String cpf = rs.getString("cpf");
-                String email = rs.getString("email");
+              
+                String nota_final = rs.getString("nota_final");
 
-                alunos.add(new String[]{matricula, nome, cpf, email});
+                alunos.add(new String[]{nome, nota_final});
+               
+                              
+               
             }
+            
+              for (String[] aluno : alunos) {
+                    System.out.println("nome: " + aluno);
+                }
+            
+            
         } catch (SQLException e) {
             e.printStackTrace();
         }

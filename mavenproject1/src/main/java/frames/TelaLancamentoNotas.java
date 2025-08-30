@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.table.DefaultTableModel;
 import src.ClassManagement;
 
 /**
@@ -29,8 +30,27 @@ public class TelaLancamentoNotas extends javax.swing.JFrame {
         DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>(listaUsuarios.toArray(new String[0]));
         cboTurmas.setModel(model);
         
+        listar();
+        
         
     }
+    ClassManagement classe = new ClassManagement();
+    
+    private void listar() {
+        
+            String turma = (String) cboTurmas.getSelectedItem();
+           
+            
+            List<String[]> turmas = classe.listarAlunos(turma);
+
+        DefaultTableModel tabela = (DefaultTableModel) tblNotas.getModel();
+        tabela.setRowCount(0);
+
+        for (String[] turmass : turmas) {
+            tabela.addRow(turmass);
+        }
+    }
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
