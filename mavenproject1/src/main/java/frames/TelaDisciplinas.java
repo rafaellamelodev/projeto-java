@@ -1,87 +1,83 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package frames;
+
+import dao.DisciplinaDAO;
+import model.Disciplina;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.util.List;
 
-/**
- *
- * @author D18_11
- */
 public class TelaDisciplinas extends javax.swing.JFrame {
-     private JTextField txtCodigo = new JTextField(12);
-    private JTextField txtNome   = new JTextField(24);
-    private JSpinner   spCarga   = new JSpinner(new SpinnerNumberModel(40, 1, 1000, 1));
-    
-    private JButton btnSalvar   = new JButton("Salvar");
-    private JButton btnAtualizar= new JButton("Atualizar");
-    private JButton btnExcluir  = new JButton("Excluir");
-    private JButton btnLimpar   = new JButton("Limpar");
-    
-     private JTable tabela = new JTable();
+
+    private JTextField txtCodigo = new JTextField(12);
+    private JTextField txtNome = new JTextField(24);
+    private JSpinner spCarga = new JSpinner(new SpinnerNumberModel(40, 1, 1000, 1));
+    private JButton btnSalvar = new JButton("Salvar");
+    private JButton btnAtualizar = new JButton("Atualizar");
+    private JButton btnExcluir = new JButton("Excluir");
+    private JButton btnLimpar = new JButton("Limpar");
+    private JTable tabela = new JTable();
+
     private DefaultTableModel modelo =
             new DefaultTableModel(new Object[]{"ID", "Código", "Nome", "Carga Horária"}, 0) {
                 @Override public boolean isCellEditable(int row, int column) { return false; }
             };
 
-
-   public TelaDisciplinas() {
+    public TelaDisciplinas() {
         super("Disciplinas");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(900, 560);
         setLocationRelativeTo(null);
 
-        setLayout(new BorderLayout(8,8));
+        setLayout(new BorderLayout(8, 8));
         add(criarPainelFormulario(), BorderLayout.NORTH);
         add(criarPainelTabela(), BorderLayout.CENTER);
 
-        // Handlers vazios para ligar depois ao BD
+        // Handlers para os botões
         btnSalvar.addActionListener(e -> onSalvar());
         btnAtualizar.addActionListener(e -> onAtualizar());
         btnExcluir.addActionListener(e -> onExcluir());
-        btnLimpar.addActionListener(e -> onLimpar());
+        btnLimpar.addActionListener(e -> limparCampos());
 
-        // Seleção na tabela (só popular campos; lógica virá depois)
+        // Lógica para preencher os campos ao selecionar uma linha da tabela
         tabela.getSelectionModel().addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting() && tabela.getSelectedRow() >= 0) {
                 int row = tabela.getSelectedRow();
-                
+                txtCodigo.setText(String.valueOf(tabela.getValueAt(row, 1)));
+                txtNome.setText(String.valueOf(tabela.getValueAt(row, 2)));
+                spCarga.setValue(tabela.getValueAt(row, 3));
             }
         });
+
+        carregarDisciplinas(); // Carregar as disciplinas ao abrir a tela
     }
-    
-     private JComponent criarPainelFormulario() {
+
+    // Painel de formulário com campos de entrada
+    private JComponent criarPainelFormulario() {
         JPanel box = new JPanel(new BorderLayout());
         box.setBorder(BorderFactory.createTitledBorder("Cadastro de Disciplinas"));
 
         JPanel form = new JPanel(new GridBagLayout());
         GridBagConstraints gc = new GridBagConstraints();
-        gc.insets = new Insets(6,6,6,6);
+        gc.insets = new Insets(6, 6, 6, 6);
         gc.anchor = GridBagConstraints.WEST;
         gc.fill = GridBagConstraints.HORIZONTAL;
 
-        // Linha 1: Código
         gc.gridx = 0; gc.gridy = 0;
         form.add(new JLabel("Código:"), gc);
         gc.gridx = 1; gc.gridy = 0; gc.weightx = 1;
         form.add(txtCodigo, gc);
 
-        // Linha 2: Nome
         gc.gridx = 0; gc.gridy = 1; gc.weightx = 0;
         form.add(new JLabel("Nome:"), gc);
         gc.gridx = 1; gc.gridy = 1; gc.weightx = 1;
         form.add(txtNome, gc);
 
-        // Linha 3: Carga Horária
         gc.gridx = 0; gc.gridy = 2; gc.weightx = 0;
         form.add(new JLabel("Carga Horária (h):"), gc);
         gc.gridx = 1; gc.gridy = 2; gc.weightx = 1;
         form.add(spCarga, gc);
 
-        // Botões ao lado direito
         JPanel botoes = new JPanel(new GridLayout(2, 2, 6, 6));
         botoes.add(btnSalvar);
         botoes.add(btnAtualizar);
@@ -92,39 +88,112 @@ public class TelaDisciplinas extends javax.swing.JFrame {
         box.add(botoes, BorderLayout.EAST);
         return box;
     }
-     
-       private JComponent criarPainelTabela() {
+
+    // Painel da tabela de disciplinas cadastradas
+    private JComponent criarPainelTabela() {
         tabela.setModel(modelo);
         tabela.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         JScrollPane sp = new JScrollPane(tabela);
         sp.setBorder(BorderFactory.createTitledBorder("Disciplinas cadastradas"));
         return sp;
     }
-       
-        private void onSalvar() {
-        // TODO: validar campos e inserir no banco
-        // Ex.: INSERT INTO disciplinas (codigo, nome, carga_horaria) VALUES (?,?,?)
-        JOptionPane.showMessageDialog(this, "Salvar (lógica de BD ainda não ligada).");
+
+    // Método para salvar uma nova disciplina
+    private void onSalvar() {
+        try {
+            Disciplina disciplina = new Disciplina();
+            disciplina.setCodigo(txtCodigo.getText().trim());
+            disciplina.setNome(txtNome.getText().trim());
+            disciplina.setCargaHoraria((Integer) spCarga.getValue());
+
+            boolean sucesso = new DisciplinaDAO().salvar(disciplina);
+
+            if (sucesso) {
+                JOptionPane.showMessageDialog(this, "Disciplina salva com sucesso!");
+                limparCampos();
+                carregarDisciplinas(); // Atualiza a tabela com a nova disciplina
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro ao salvar: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
+    // Método para atualizar uma disciplina existente
     private void onAtualizar() {
-        // TODO: validar seleção e atualizar no banco
-        // Ex.: UPDATE disciplinas SET nome=?, carga_horaria=? WHERE id=?
-        JOptionPane.showMessageDialog(this, "Atualizar (lógica de BD ainda não ligada).");
+        if (txtCodigo.getText().isBlank()) {
+            JOptionPane.showMessageDialog(this, "Selecione uma disciplina na tabela.");
+            return;
+        }
+
+        try {
+            int id = Integer.parseInt(tabela.getValueAt(tabela.getSelectedRow(), 0).toString());
+            Disciplina disciplina = new Disciplina();
+            disciplina.setId(id);
+            disciplina.setCodigo(txtCodigo.getText().trim());
+            disciplina.setNome(txtNome.getText().trim());
+            disciplina.setCargaHoraria((Integer) spCarga.getValue());
+
+            boolean sucesso = new DisciplinaDAO().atualizar(disciplina);
+
+            if (sucesso) {
+                JOptionPane.showMessageDialog(this, "Disciplina atualizada com sucesso!");
+                limparCampos();
+                carregarDisciplinas(); // Atualiza a tabela com os dados atualizados
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro ao atualizar: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
+    // Método para excluir uma disciplina
     private void onExcluir() {
-        // TODO: validar seleção e excluir no banco
-        // Ex.: DELETE FROM disciplinas WHERE id=?
-        JOptionPane.showMessageDialog(this, "Excluir (lógica de BD ainda não ligada).");
+        if (txtCodigo.getText().isBlank()) {
+            JOptionPane.showMessageDialog(this, "Selecione uma disciplina na tabela.");
+            return;
+        }
+
+        try {
+            int id = Integer.parseInt(tabela.getValueAt(tabela.getSelectedRow(), 0).toString());
+            boolean sucesso = new DisciplinaDAO().deletar(id);
+
+            if (sucesso) {
+                JOptionPane.showMessageDialog(this, "Disciplina excluída com sucesso!");
+                limparCampos();
+                carregarDisciplinas(); // Atualiza a tabela após a exclusão
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro ao excluir: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
-    private void onLimpar() {
+    // Método para carregar todas as disciplinas na tabela
+    private void carregarDisciplinas() {
+        try {
+            List<Disciplina> lista = new DisciplinaDAO().listarTodos();
+            DefaultTableModel model = new DefaultTableModel(
+                new Object[]{"ID", "Código", "Nome", "Carga Horária"}, 0
+            ) { @Override public boolean isCellEditable(int row, int column) { return false; }};
+
+            for (Disciplina d : lista) {
+                model.addRow(new Object[]{ d.getId(), d.getCodigo(), d.getNome(), d.getCargaHoraria() });
+            }
+            tabela.setModel(model);
+            tabela.getTableHeader().setReorderingAllowed(false);
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Erro ao carregar disciplinas: " + e.getMessage());
+        }
+    }
+
+    // Método para limpar os campos
+    private void limparCampos() {
         txtCodigo.setText("");
         txtNome.setText("");
-        spCarga.setValue(40);
-        tabela.clearSelection();
-        txtCodigo.requestFocus();
+        spCarga.setValue(40); // Valor inicial para carga horária
+        tabela.clearSelection(); // Limpar a seleção da tabela
     }
 
     @SuppressWarnings("unchecked")
@@ -150,38 +219,14 @@ public class TelaDisciplinas extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Windows".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaDisciplinas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaDisciplinas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaDisciplinas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaDisciplinas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
+   public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TelaDisciplinas().setVisible(true);
             }
         });
     }
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
-}
