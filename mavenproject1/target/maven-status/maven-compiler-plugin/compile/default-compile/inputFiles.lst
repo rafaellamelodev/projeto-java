@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 C:\Users\D18_11\Desktop\JSchool\projeto-java\mavenproject1\src\main\java\connections\testeeee.java
 C:\Users\D18_11\Desktop\JSchool\projeto-java\mavenproject1\src\main\java\dao\UserDAO.java
 C:\Users\D18_11\Desktop\JSchool\projeto-java\mavenproject1\src\main\java\model\Aluno.java
@@ -14,3 +15,20 @@ C:\Users\D18_11\Desktop\JSchool\projeto-java\mavenproject1\src\main\java\frames\
 C:\Users\D18_11\Desktop\JSchool\projeto-java\mavenproject1\src\main\java\dao\DisciplinaDAO.java
 C:\Users\D18_11\Desktop\JSchool\projeto-java\mavenproject1\src\main\java\frames\TelaLancamentoNotas.java
 C:\Users\D18_11\Desktop\JSchool\projeto-java\mavenproject1\src\main\java\src\UserOperations.java
+=======
+C:\Users\D18_11\Documents\projeto-java\mavenproject1\src\main\java\model\Aluno.java
+C:\Users\D18_11\Documents\projeto-java\mavenproject1\src\main\java\model\Disciplina.java
+C:\Users\D18_11\Documents\projeto-java\mavenproject1\src\main\java\dao\AlunoDAO.java
+C:\Users\D18_11\Documents\projeto-java\mavenproject1\src\main\java\frames\TelaLancamentoNotas.java
+C:\Users\D18_11\Documents\projeto-java\mavenproject1\src\main\java\frames\TelaLogin.java
+C:\Users\D18_11\Documents\projeto-java\mavenproject1\src\main\java\dao\UserDAO.java
+C:\Users\D18_11\Documents\projeto-java\mavenproject1\src\main\java\frames\TelaDisciplinas.java
+C:\Users\D18_11\Documents\projeto-java\mavenproject1\src\main\java\src\UserOperations.java
+C:\Users\D18_11\Documents\projeto-java\mavenproject1\src\main\java\connections\testeeee.java
+C:\Users\D18_11\Documents\projeto-java\mavenproject1\src\main\java\frames\TelaCadAlunos.java
+C:\Users\D18_11\Documents\projeto-java\mavenproject1\src\main\java\src\ClassManagement.java
+C:\Users\D18_11\Documents\projeto-java\mavenproject1\src\main\java\dao\DisciplinaDAO.java
+C:\Users\D18_11\Documents\projeto-java\mavenproject1\src\main\java\src\StudentManagement.java
+C:\Users\D18_11\Documents\projeto-java\mavenproject1\src\main\java\connections\DatabaseConnection.java
+C:\Users\D18_11\Documents\projeto-java\mavenproject1\src\main\java\frames\teste.java
+>>>>>>> fe397dd51983c3de50bf24736766954e317cbb9b

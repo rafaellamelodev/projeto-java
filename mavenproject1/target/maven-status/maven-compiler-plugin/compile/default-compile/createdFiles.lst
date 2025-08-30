@@ -3,9 +3,14 @@ frames\TelaCadAlunos.class
 dao\DisciplinaDAO.class
 frames\TelaLancamentoNotas$2.class
 frames\TelaLogin.class
+<<<<<<< HEAD
 frames\EditarUsuario$1.class
 model\Disciplina.class
 frames\EditarUsuario$3.class
+=======
+frames\TelaCadAlunos$7.class
+model\Disciplina.class
+>>>>>>> fe397dd51983c3de50bf24736766954e317cbb9b
 frames\TelaDisciplinas$2.class
 src\StudentManagement.class
 connections\DatabaseConnection.class
@@ -14,9 +19,13 @@ model\Aluno.class
 dao\UserDAO.class
 frames\TelaLancamentoNotas$1.class
 frames\TelaCadAlunos$4.class
+<<<<<<< HEAD
 frames\EditarUsuario.class
 connections\testeeee.class
 frames\EditarUsuario$2.class
+=======
+connections\testeeee.class
+>>>>>>> fe397dd51983c3de50bf24736766954e317cbb9b
 frames\TelaDisciplinas.class
 frames\teste.class
 src\UserOperations.class

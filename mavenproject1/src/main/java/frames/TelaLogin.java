@@ -110,7 +110,12 @@ public class TelaLogin extends javax.swing.JFrame {
         String senha = txtSenha.getText().trim();
 
         /*String senha = new String(txtSenhaLogin.getPassword()); -> caso tenha usado o password field*/
+
         if ((email.isEmpty() || email.isBlank()) && (senha.isEmpty() || senha.isBlank())) {
+
+       
+        if ((email.isEmpty() || email.isBlank()) || (senha.isEmpty() || senha.isBlank())){
+
             JOptionPane.showMessageDialog(this, "Todos os campos devem ser preenchidos");
             txtLogin.setBorder(new LineBorder(Color.RED, 1));
             txtSenha.setBorder(new LineBorder(Color.RED, 1));
@@ -134,7 +139,7 @@ public class TelaLogin extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+ 
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
