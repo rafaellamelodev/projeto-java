@@ -3,6 +3,7 @@ frames\TelaCadAlunos.class
 dao\DisciplinaDAO.class
 frames\TelaLancamentoNotas$2.class
 frames\TelaLogin.class
+frames\EditarUsuario$1.class
 model\Disciplina.class
 frames\TelaDisciplinas$2.class
 src\StudentManagement.class
@@ -12,6 +13,7 @@ model\Aluno.class
 dao\UserDAO.class
 frames\TelaLancamentoNotas$1.class
 frames\TelaCadAlunos$4.class
+frames\EditarUsuario.class
 connections\testeeee.class
 frames\TelaDisciplinas.class
 frames\teste.class
